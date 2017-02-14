@@ -35,9 +35,9 @@ public class AppController {
         // container.stop()   // did not work
         // container.getTomcat().stop();  // triggered stop events but application still accessible
         // container.getTomcat().destroy();  // throws invalid transition exception
-        container.getTomcat().getServer().stop();
+        // container.getTomcat().getServer().stop();
 
-        //container.getTomcat().getConnector().getServer().stop();
+        container.getTomcat().stop();
 
 
         //container.getTomcat().getServer().start();

@@ -3,6 +3,7 @@ package com.martin.tomcatapp;/*
  */
 
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.springframework.boot.SpringApplication;
@@ -19,8 +20,9 @@ public class App {
         return "Greetings from the app.";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(new App().getGreeting());
+
         SpringApplication.run(App.class, args);
 
     }
