@@ -6,10 +6,12 @@ package com.martin.tomcatapp;/*
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -23,8 +25,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         System.out.println(new App().getGreeting());
 
-        SpringApplication.run(App.class, args);
-
+        SpringContext.run();
     }
 
 }
