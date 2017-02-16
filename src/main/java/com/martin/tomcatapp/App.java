@@ -7,10 +7,18 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import javafx.application.Application;
+import org.apache.catalina.Context;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.EmbeddedWebApplicationContext;
+import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.context.event.ApplicationPreparedEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +26,10 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @ComponentScan("com.martin.tomcatapp")
 public class App {
+
+    @Value("${server.port}")
+    private Integer port;
+
     public String getGreeting() {
         return "Greetings from the app.";
     }
@@ -25,7 +37,14 @@ public class App {
     public static void main(String[] args) throws IOException {
         System.out.println(new App().getGreeting());
 
-        SpringContext.run();
+        // Approach #1 (Works!)
+        SpringApplication.run(App.class, new String[] { } );
+    }
+
+    // Approach #1 (Works!)
+    @Bean
+    public AppRestarter getAppRestarter() {
+        return new AppRestarter();
     }
 
 }
